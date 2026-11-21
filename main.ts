@@ -18,6 +18,10 @@ const __dirname = dirname(__filename);
 const outputDirEnv = process.env.MAKEFUN_OUTPUT_DIR;
 const targetDir = outputDirEnv ? resolve(__dirname, outputDirEnv) : '/output';
 
+if (!POEM || POEM.length > 280) {
+  throw new Error(`Poem length invalid: ${POEM.length} characters (must be 1 to 280)`);
+}
+
 mkdirSync(targetDir, { recursive: true });
 const targetFile = resolve(targetDir, 'entry.txt');
 writeFileSync(targetFile, POEM, 'utf-8');
